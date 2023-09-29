@@ -47,7 +47,98 @@ exp.load_closures()
 : Generating barotropic streamfunction solver
 : Done
 
+Similarly, the velocity decompositions in depth and density space (with 50
+levels in temperature space), and the closures used to calculate the overturning
+stream functions are loaded via
 #+begin_src jupyter-python :kernel python3 :session readme :eval never :exports both
-
+exp.load_vdecompz(verbose=True)
+exp.load_vdecompt(50, verbose=True)
+exp.load_moc_closures(verbose=True)
 #+end_src
 
+#+RESULTS:
+#+begin_example
+Decomposing velocities in z space
+Writing velocities to temporary file
+Re-opening velocity dataset
+Done
+
+Loading transformation function
+Transforming velocities to t space
+> transforming tot
+> transforming ek
+> transforming sh
+> transforming bot
+> transforming tw
+Writing velocities to temporary file
+Re-opening velocity dataset
+Done
+
+Loading mocz closure
+Loading moct closure
+Done
+#+end_example
+
+* Calculating Force Functions/Stream Functions Examples
+
+After loading the required features of the =ArcherExperiment=, it is trivial
+(and generally quick for reasonable numbers of timesteps) to generate force
+functions and stream functions as xarray DataArrays.
+
+** Barotropic Stream Function
+
+#+begin_src jupyter-python :kernel python3 :session readme :eval never :exports both
+exp.get_psiBT(T=-1).plot.contourf(levels=31, robust=True)
+#+end_src
+
+#+RESULTS:
+:RESULTS:
+: <matplotlib.contour.QuadContourSet at 0x120123940>
+[[file:./.ob-jupyter/45a0b2180a3536f1dd077f21d4fae95e5ac3ef6f.png]]
+:END:
+
+** Depth Integrated Force Function for Coriolis Force
+
+#+begin_src jupyter-python :kernel python3 :session readme :eval never :exports both
+exp.get_HAbt("cori", T=-1).plot.contourf(levels=31, robust=True)
+#+end_src
+
+#+RESULTS:
+:RESULTS:
+: <matplotlib.contour.QuadContourSet at 0x120489d50>
+[[file:./.ob-jupyter/36b32e0eb93c64deddc7ab78af4e3b7ced418ff4.png]]
+:END:
+
+** Meridional Overturning Force Function for Buoyancy Force
+
+#+begin_src jupyter-python :kernel python3 :session readme :eval never :exports both
+exp.get_AOTx("buoy", T=-1).isel(X=10).plot.contourf(levels=31, robust=True)
+#+end_src
+
+#+RESULTS:
+:RESULTS:
+: <matplotlib.contour.QuadContourSet at 0x1293293f0>
+[[file:./.ob-jupyter/7c63abc5ec757148e8f3293549b68fa85355bede.png]]
+:END:
+
+** Full Meridional Overturning Stream Function in Depth and Density Space
+
+#+begin_src jupyter-python :kernel python3 :session readme :eval yes :exports both
+exp.get_mocz("tot", T=-1).plot.contourf(levels=31)
+#+end_src
+
+#+RESULTS:
+:RESULTS:
+: <matplotlib.contour.QuadContourSet at 0x12a9f0b80>
+[[file:./.ob-jupyter/20c25d4ef966d3dd44098a5d7481fe1340fe1f59.png]]
+:END:
+
+#+begin_src jupyter-python :kernel python3 :session readme :eval yes :exports both
+exp.get_moct("sh", T=-1, corrected=True).plot.contourf(levels=31)
+#+end_src
+
+#+RESULTS:
+:RESULTS:
+: <matplotlib.contour.QuadContourSet at 0x12dd3fbe0>
+[[file:./.ob-jupyter/744b22a91d57177c5afe7cf506e91851d2974c0c.png]]
+:END:
