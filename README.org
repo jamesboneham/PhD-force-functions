@@ -1,2 +1,17 @@
 #+TITLE: PhD Code for Calculating Force Functions
 #+HTML_HEAD: <base target="_blank">
+
+Repository containing code used to calculate the force functions as defined in the thesis
+/Dynamics of the Subpolar North Atlantic Ocean Circulation—the Role of Surface
+Forcing and Topography/ (link to be published post-graduation in May 2024).
+
+#+begin_src bash :eval never :exports code
+dune build
+#+end_src
+
+#+begin_src jupyter-python :kernel python3 :session readme :exports nil
+print(5)
+#+end_src
+
+#+RESULTS:
+: 5
