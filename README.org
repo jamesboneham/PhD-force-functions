@@ -123,7 +123,7 @@ exp.get_AOTx("buoy", T=-1).isel(X=10).plot.contourf(levels=31, robust=True)
 
 ** Full Meridional Overturning Stream Function in Depth and Density Space
 
-#+begin_src jupyter-python :kernel python3 :session readme :eval yes :exports both
+#+begin_src jupyter-python :kernel python3 :session readme :eval never :exports both
 exp.get_mocz("tot", T=-1).plot.contourf(levels=31)
 #+end_src
 
@@ -133,7 +133,7 @@ exp.get_mocz("tot", T=-1).plot.contourf(levels=31)
 [[file:./.ob-jupyter/20c25d4ef966d3dd44098a5d7481fe1340fe1f59.png]]
 :END:
 
-#+begin_src jupyter-python :kernel python3 :session readme :eval yes :exports both
+#+begin_src python :kernel python3 :session readme :eval never :exports both
 exp.get_moct("sh", T=-1, corrected=True).plot.contourf(levels=31)
 #+end_src
 
