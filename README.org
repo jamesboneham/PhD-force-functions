@@ -12,7 +12,7 @@ The class =ArcherExperiment= and associated methods are intended to be suitable
 for interactive use. The first step is to load a netCDF file created by MITgcm
 (or stitched together from various other output files):
 
-#+begin_src jupyter-python :kernel python3 :session readme :eval never :exports code
+#+begin_src python :kernel python3 :session readme :eval never :exports code
 from load import ArcherExperiment
 
 exp = ArcherExperiment("DATAFILE.nc", chunks=None, verbose=True)
@@ -22,7 +22,7 @@ exp = ArcherExperiment("DATAFILE.nc", chunks=None, verbose=True)
 
 The forces (Coriolis, buoyancy, wind stress, viscosity, and inertia) can then be
 loaded:
-#+begin_src jupyter-python :kernel python3 :session readme :eval never :exports both
+#+begin_src python :kernel python3 :session readme :eval never :exports both
 exp.load_forces()
 #+end_src
 
@@ -34,7 +34,7 @@ exp.load_forces()
 
 The closures used to calculate the various force functions and the barotropic streamfunction
 are all created using:
-#+begin_src jupyter-python :kernel python3 :session readme :eval never :exports both
+#+begin_src python :kernel python3 :session readme :eval never :exports both
 exp.load_closures()
 #+end_src
 
