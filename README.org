@@ -9,9 +9,21 @@ Forcing and Topography/ (link to be published post-graduation in May 2024).
 dune build
 #+end_src
 
-#+begin_src jupyter-python :kernel python3 :session readme :exports nil
-print(5)
+
+* Loading Experiment Output
+
+The class =ArcherExperiment= and associated methods are intended to be suitable
+for interactive use. The first step is to load a netCDF file created by MITgcm
+(or stitched together from various other output files):
+
+#+begin_src jupyter-python :kernel python3 :session readme :eval never :exports both
+from load import ArcherExperiment
+exp = ArcherExperiment("DATAFILE.nc", chunks=None, verbose=True)
 #+end_src
 
 #+RESULTS:
-: 5
+
+#+begin_src jupyter-python :kernel python3 :session readme :eval never :exports both
+
+#+end_src
+
