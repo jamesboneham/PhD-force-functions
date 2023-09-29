@@ -5,10 +5,6 @@ Repository containing code used to calculate the force functions as defined in t
 /Dynamics of the Subpolar North Atlantic Ocean Circulation—the Role of Surface
 Forcing and Topography/ (link to be published post-graduation in May 2024).
 
-#+begin_src bash :eval never :exports code
-dune build
-#+end_src
-
 
 * Loading Experiment Output
 
@@ -16,12 +12,40 @@ The class =ArcherExperiment= and associated methods are intended to be suitable
 for interactive use. The first step is to load a netCDF file created by MITgcm
 (or stitched together from various other output files):
 
-#+begin_src jupyter-python :kernel python3 :session readme :eval never :exports both
+#+begin_src jupyter-python :kernel python3 :session readme :eval never :exports code
 from load import ArcherExperiment
+
 exp = ArcherExperiment("DATAFILE.nc", chunks=None, verbose=True)
 #+end_src
 
 #+RESULTS:
+
+The forces (Coriolis, buoyancy, wind stress, viscosity, and inertia) can then be
+loaded:
+#+begin_src jupyter-python :kernel python3 :session readme :eval never :exports both
+exp.load_forces()
+#+end_src
+
+#+RESULTS:
+: Calculating forces
+: Writing forces to temporary file
+: Re-opening force dataset
+: Done
+
+The closures used to calculate the various force functions and the barotropic streamfunction
+are all created using:
+#+begin_src jupyter-python :kernel python3 :session readme :eval never :exports both
+exp.load_closures()
+#+end_src
+
+#+RESULTS:
+: Generating pressure solver
+: Generating A^{OTx} solver
+: Generating A^{OTy} solver
+: Generating HA^{BT} direct solver
+: Generating HA^{BT} residual solver
+: Generating barotropic streamfunction solver
+: Done
 
 #+begin_src jupyter-python :kernel python3 :session readme :eval never :exports both
 
